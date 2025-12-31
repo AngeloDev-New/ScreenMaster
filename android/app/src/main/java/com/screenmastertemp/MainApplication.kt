@@ -1,4 +1,4 @@
-package com.screenmastertemp
+package com.ScreenMaster
 
 import android.app.Application
 import com.facebook.react.PackageList

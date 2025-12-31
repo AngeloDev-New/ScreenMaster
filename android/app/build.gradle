@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.screenmastertemp"
+    namespace "com.ScreenMaster"
     defaultConfig {
-        applicationId "com.screenmastertemp"
+        applicationId "com.ScreenMaster"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
