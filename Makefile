@@ -1,4 +1,4 @@
-.PHONY: install start stop android reset clean status
+.PHONY: install start reset clean push
 
 install:
 	npm install
@@ -15,3 +15,7 @@ reset:
 
 clean:
 	cd android && ./gradlew clean
+push:
+	git add .
+	git commit -am "$(m)"
+

@@ -20,24 +20,25 @@ export default class StartupScreen extends Component{
     }
     render(){
         return(
-            <View style={[styles.flex1,styles.center,styles.bgDark]}>
-                <View style={[styles.row,styles.center,styles.bgDark]}>
-                <TouchableOpacity style={styles.p4} onPress={this.tooglePlay_Pause}>
-                    <Icon name={this.state.Recording?"pause":"play"} size={140} color={this.state.Recording?"#fff":"#fff"}></Icon>
-                </TouchableOpacity>
-                {this.state.Recording&&
-                (<TouchableOpacity style={styles.p4}>
-                    <Icon name={"stop"} size={140} color={"#f00"}></Icon>
-                </TouchableOpacity>)}
+            <>
+                <View style={[styles.flex1,styles.center,styles.bgDark]}>
+                    <View style={[styles.row,styles.center,styles.bgDark]}>
+                    <TouchableOpacity style={styles.p4} onPress={this.tooglePlay_Pause}>
+                        <Icon name={this.state.Recording?"pause":"play"} size={140} color={this.state.Recording?"#fff":"#fff"}></Icon>
+                    </TouchableOpacity>
+                    {this.state.Recording&&
+                    (<TouchableOpacity style={styles.p4}>
+                        <Icon name={"stop"} size={140} color={"#f00"}></Icon>
+                    </TouchableOpacity>)}
+                    </View>
+                    {this.state.Recording&&
+                    (<Text style={[styles.textWhite,styles.textLg,styles.mt4]}>{this.state.currentRecording.time}</Text>)}
+                    <Text style={[styles.textWhite,styles.textLg,styles.mt4]}>{this.state.Recording?"Gravando":"Gravar"}</Text>
+                    <View>
+                    </View>
                 </View>
-                {this.state.Recording&&
-                (<Text style={[styles.textWhite,styles.textLg,styles.mt4]}>{this.state.currentRecording.time}</Text>)}
-                <Text style={[styles.textWhite,styles.textLg,styles.mt4]}>{this.state.Recording?"Gravando":"Gravar"}</Text>
-                <View>
-                </View>
-                    <Galery visible={true}/>
-
-            </View>
+                <Galery visible={true}/>
+            </>
         )
     }
 }
