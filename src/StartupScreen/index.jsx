@@ -1,8 +1,10 @@
 import React,{Component} from "react";
 import { View,TouchableOpacity,Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Galery from "../Galery"
+// import Galery from "../Galery"
+import RecordingList from "../RecordingList"
 import styles from "../styles"
+
 export default class StartupScreen extends Component{
     constructor(props){
         super(props)
@@ -37,7 +39,7 @@ export default class StartupScreen extends Component{
                     <View>
                     </View>
                 </View>
-                <Galery visible={true}/>
+                <RecordingList/>
             </>
         )
     }

@@ -13,6 +13,10 @@ const tw = StyleSheet.create({
   itemsCenter: { alignItems: "center" },
   absolute:{position:"absolute"},
 
+  t4:{top:16},
+  l4:{left:16},
+  b4:{bottom:16},
+  r4:{right:16},
   /* Spacing - margin */
   mt1: { marginTop: 4 },
   mt2: { marginTop: 8 },
@@ -32,9 +36,6 @@ const tw = StyleSheet.create({
 
   px2: { paddingHorizontal: 8 },
   py2: { paddingVertical: 8 },
-
-  b4:{bottom:16},
-  r4:{right:16},
 
 
   /* Text */
