@@ -23,8 +23,8 @@ reset-native:
 	rm -f package-lock.json
 	rm -rf android/build
 	rm -rf android/app/build
+	npm i
 	cd android && ./gradlew clean && cd ..
-	npm install
 	npx react-native start --reset-cache
 
 clean:
