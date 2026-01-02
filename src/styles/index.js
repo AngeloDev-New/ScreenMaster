@@ -18,6 +18,8 @@ const tw = StyleSheet.create({
   b4:{bottom:16},
   r4:{right:16},
   /* Spacing - margin */
+m1:{margin:4},
+
   mt1: { marginTop: 4 },
   mt2: { marginTop: 8 },
   mt3: { marginTop: 12 },
@@ -63,6 +65,16 @@ const tw = StyleSheet.create({
   /* Sizes */
   wFull: { width: "100%" },
   hFull: { height: "100%" },
-});
+  absoluteCenter: {
+    position: "absolute",
+    bottom: "50%",
+  left: "50%",
+  transform: [
+    { translateX: "-50%" },
+    { translateY: "25%" }, // metade da altura
+  ],
+}
+}
+);
 
 export default tw;

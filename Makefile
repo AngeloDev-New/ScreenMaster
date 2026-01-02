@@ -1,8 +1,4 @@
-.PHONY: install start reset clean push
-
-install:
-	npm install
-	cd ios && pod install || true
+.PHONY:run start reset reset-native clean push install
 
 run:
 	npx react-native run-android
@@ -14,7 +10,7 @@ reset:
 	git reset --hard HEAD
 	rm -rf node_modules
 	rm -f package-lock.json
-	npm install
+	npm i
 	npx react-native start --reset-cache
 
 reset-native:
@@ -32,4 +28,9 @@ clean:
 push:
 	git add .
 	git commit -am "$(m)"
+	git push
 
+install:
+	npm i "$(p)"
+	cd android && .gradlew clean
+	npx react-native run-android
