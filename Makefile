@@ -11,6 +11,20 @@ start:
 	npx react-native start
 
 reset:
+	git reset --hard HEAD
+	rm -rf node_modules
+	rm -f package-lock.json
+	npm install
+	npx react-native start --reset-cache
+
+reset-native:
+	git reset --hard HEAD
+	rm -rf node_modules
+	rm -f package-lock.json
+	rm -rf android/build
+	rm -rf android/app/build
+	cd android && ./gradlew clean && cd ..
+	npm install
 	npx react-native start --reset-cache
 
 clean:
