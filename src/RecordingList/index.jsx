@@ -1,9 +1,10 @@
 import {useState}from "react";
-import { View,Text,TouchableOpacity,Modal,FlatList,Image } from "react-native";
+import { View,Text,TouchableOpacity,Modal,FlatList,Image, } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { listFiles } from "react-native-saf-x";
 import {createThumbnail} from "react-native-create-thumbnail"
-
+// "Pacote desatualizado"
+// import IntentLauncher from "react-native-intent-launcher"
 import styles from "../styles"
 export default props=>{
     const [InGalery,setInGalery] = useState(false)//TODO: passar a false pra n iniciar na galerya
@@ -11,38 +12,32 @@ export default props=>{
     function back(){
         setInGalery(false)
     }
-async function goGalery() {
-  setInGalery(true)
+    function openVideoUrl(uri){
 
-  const files = await listFiles(props.uri)
+    }
+    function goGalery(){
+        setInGalery(true)
+        listFiles(props.uri)
+            .then(items=>{
+                const itemsWithKey = items.map((item,index)=>{
+                    // async function getThumbUri(urlVidep) {
+                    //     const thumb = await createThumbnail({url:urlVidep,timeStamp:1000}) 
+                    //     return thumb.path
+                    // }
+                    const mod = new Date(item.lastModified)
+                    return {
+                        ...item,
+                        lastModified:mod.toString(),
+                        id:index,
+                        thumbUri:null
+                    }
+                    
+                }) 
+                console.log(itemsWithKey)
+                setItems(itemsWithKey)})
+                
 
-  const itemsWithThumbAndId = await Promise.all(
-    files.map(async (item, index) => {
-      try {
-        const { path } = await createThumbnail({
-          url: item.uri,
-          timeStamp: 1000,
-        })
-
-        return {
-          id: String(index),
-          thumbUri: path,
-          ...item,
-        }
-      } catch (err) {
-        // Não é vídeo ou falhou → ignora thumbnail
-        return {
-          id: String(index),
-          thumbUri: null,
-          ...item,
-        }
-      }
-    })
-  )
-
-  setItems(itemsWithThumbAndId)
-}
-
+    }
     return(
         <>
         <TouchableOpacity
@@ -55,30 +50,50 @@ async function goGalery() {
             <View
                 style={[styles.bgDark,styles.flex1]}>
                     <View style={[
-                        {paddingTop:60},
+                        {paddingTop:70},
                         styles.flex1
                     ]}>
                         <FlatList
                             data = {items}
-                            numColumns={3}
+                            numColumns={1}
                             keyExtractor={item=>item.id}
                             renderItem={({item})=>{
                                 
                                 return(
                                     <View style={[{
-                                        height:80
+                                        // height:100,
+                                        margin:5,
+                                        
                                     },
+                                    
                                     styles.flex1,
 
                                     ]}>
-                                        <Image
-                                            source={{uri:item.thumbUri}}
+                                        <TouchableOpacity 
                                             style={[
-                                                styles.hFull,
-                                                styles.wFull
-                                            ]}
-                                        />
-                                        {/* <Text style={{ color: "#fff" }}>{item.name}</Text> */}
+                                                styles.row
+                                                ]} 
+                                            onPress={()=>openVideoUrl(item.uri)}>
+                                            <Image
+                                                source={
+                                                    item.thumbUri
+                                                    ?{uri:item.thumbUri}
+                                                    :require("../images/thumbDefault.png")
+                                                }
+                                                style={[
+                                                    styles.rounded,
+                                                    styles.hFull,
+                                                    styles.flex1,
+                                                   
+                                                ]}
+                                            />
+                                            <View style={[styles.col,styles.flex2,styles.p3]}>
+                                                <Text style={[styles.textWhite,styles.textMd]}>{item.name}</Text>
+                                                <Text style={[styles.textWhite,styles.textSm]}>{item.lastModified}</Text>
+                                                
+                                            </View>
+                                        </TouchableOpacity>
+                                                                
                                     </View>
                                     )
                             }}

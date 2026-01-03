@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const tw = StyleSheet.create({
   /* Layout */
   flex1: { flex: 1 },
+  flex2: { flex: 2 },
   row: { flexDirection: "row" },
   col: { flexDirection: "column" },
   center: {
@@ -19,7 +20,7 @@ const tw = StyleSheet.create({
   r4:{right:16},
   /* Spacing - margin */
 m1:{margin:4},
-
+  mls:{marginLeft:8},
   mt1: { marginTop: 4 },
   mt2: { marginTop: 8 },
   mt3: { marginTop: 12 },
