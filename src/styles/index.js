@@ -36,6 +36,8 @@ m1:{margin:4},
   p3: { padding: 12 },
   p4: { padding: 16 },
 
+  pt4:{paddingTop:16},
+
   px2: { paddingHorizontal: 8 },
   py2: { paddingVertical: 8 },
 

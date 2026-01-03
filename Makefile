@@ -32,5 +32,5 @@ push:
 
 install:
 	npm i "$(p)"
-	cd android && .gradlew clean
+	cd android && ./gradlew clean
 	npx react-native run-android

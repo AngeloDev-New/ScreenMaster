@@ -17,6 +17,7 @@ componentDidMount() {
       this.setState({ uri_recording_list: uri });
       listFiles(this.normalizedTreeUri(uri))
         .then(() => {
+
             console.log("Uri Atualizada com sucesso")
         })
         .catch(() => {
@@ -80,7 +81,7 @@ componentDidMount() {
                     </View>
                 </View>
                 {
-                    this.state.uri_recording_list && <RecordingList/>
+                    this.state.uri_recording_list && <RecordingList uri={this.normalizedTreeUri(this.state.uri_recording_list)}/>
                 }
                 { 
                     !this.state.uri_recording_list && (<TouchableOpacity
