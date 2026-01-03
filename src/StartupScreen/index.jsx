@@ -29,16 +29,29 @@ componentDidMount() {
     constructor(props){
         super(props)
         this.state = {
+            Contador:null,
             uri_recording_list:"",
             Recording:false,
-            currentRecording:{
-                time:"00:00:00"
-            }
+            currentRecording:0
+            
             
         }
         this.tooglePlay_Pause = this.tooglePlay_Pause.bind(this)
         this.getUri = this.getUri.bind(this)
+        this.display = this.display.bind(this)
         this.normalizedTreeUri = this.normalizedTreeUri.bind(this)
+    }
+    display(){
+        const n=normalize=>String(normalize).length>1
+            ?normalize
+            :`0${normalize}`
+        const time_ms_total = this.state.currentRecording
+        const time_ms = time_ms_total%100
+        const time_s = parseInt(time_ms_total/100)%60
+        const time_m = parseInt(time_ms_total/(100*60))%60
+        const time_h = parseInt(time_ms_total/(100*60*60))%60
+
+        return `${n(time_h)}:${n(time_m)}:${n(time_s)}:${n(time_ms)}`
     }
     getUri(){
         openDocumentTree(true)
@@ -59,7 +72,27 @@ componentDidMount() {
             return uri.split("/document/")[0];
 }
     tooglePlay_Pause(){
-        this.setState({Recording:!this.state.Recording})
+        const recording = !this.state.Recording
+        let contador = null
+        if (recording){
+            contador = setInterval(() =>{
+                                    this.setState(prev=>({currentRecording:prev.currentRecording+1}))
+                                },10) 
+            
+            
+        }else{
+            contador = clearInterval(this.state.Contador)
+
+        }
+                                 
+        this.setState({
+            Recording:recording,
+            Contador:contador,
+            currentRecording:0
+
+        })
+
+
     }
     render(){
         return(
@@ -67,15 +100,11 @@ componentDidMount() {
                 <View style={[tw.flex1,tw.center,tw.bgDark]}>
                     <View style={[tw.row,tw.center,tw.bgDark]}>
                     <TouchableOpacity style={tw.p4} onPress={this.tooglePlay_Pause}>
-                        <Icon name={this.state.Recording?"pause":"play"} size={140} color={this.state.Recording?"#fff":"#fff"}></Icon>
+                        <Icon name={this.state.Recording?"stop":"play"} size={140} color={this.state.Recording?"#f00":"#fff"}></Icon>
                     </TouchableOpacity>
-                    {this.state.Recording&&
-                    (<TouchableOpacity style={tw.p4}>
-                        <Icon name={"stop"} size={140} color={"#f00"}></Icon>
-                    </TouchableOpacity>)}
                     </View>
                     {this.state.Recording&&
-                    (<Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.state.currentRecording.time}</Text>)}
+                    (<Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.display()}</Text>)}
                     <Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.state.Recording?"Gravando":"Gravar"}</Text>
                     <View>
                     </View>
