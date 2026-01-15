@@ -5,6 +5,7 @@ import RecordingList from "../RecordingList"
 import { openDocumentTree,mkdir, listFiles } from "react-native-saf-x";
 import tw from "../styles"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { multiply } from '@angelo-dev/react-native-storage';
 
 export default class StartupScreen extends Component{
 componentDidMount() {
@@ -104,7 +105,7 @@ componentDidMount() {
                     </TouchableOpacity>
                     </View>
                     {this.state.Recording&&
-                    (<Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.display()}</Text>)}
+                    (<Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.display()}ok{multiply(45,2)}</Text>)}
                     <Text style={[tw.textWhite,tw.textLg,tw.mt4]}>{this.state.Recording?"Gravando":"Gravar"}</Text>
                     <View>
                     </View>
